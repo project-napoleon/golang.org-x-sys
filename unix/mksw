@@ -1,0 +1,30 @@
+#!/bin/bash
+./mkerrors_sw64.sh -Wall -Werror -static -I/tmp/include |gofmt >zerrors_linux_sw64.go 
+./mksyscall_sw64.pl -tags linux,sw64 syscall_linux.go syscall_linux_sw64.go |gofmt >zsyscall_linux_sw64.go
+# Getpid、Getppid handle specially for sw64, currently manually remove the implements of Getpid and Getppid in zsyscall_linux_sw64.go
+./mksysnum_linux_sw64.pl /usr/include/asm/unistd.h |gofmt >zsysnum_linux_sw64.go
+go tool cgo -godefs -- -Wall -Werror -static -I/tmp/include linux/types.go |go run mkpost_sw64.go >ztypes_linux_sw64.go
+# replace by handle in ztypes_linux_sw64.go
+# type ScmTimestamping struct {
+#      Ts [3]Timespec
+# }
+# type Statfs_t struct {
+#      Type    int64
+#      Bsize   int64
+#      Blocks  uint64
+#      Bfree   uint64
+#      Bavail  uint64
+#      Files   uint64
+#      Ffree   uint64
+#      Fsid    Fsid
+#      Namelen int64
+#      Frsize  int64
+#      Flags   int64
+#      Spare   [4]int64
+# }
+
+# replace Blocks uint64 to int64 in ztypes_linux_sw64.go of Stat_t struct
+
+# replace X_* to _ with order :1,$s/X_[A-Za-z0-9_]*/_/gc
+
+# add // +build sw64,linux for ztypes_linux_sw64.go 
