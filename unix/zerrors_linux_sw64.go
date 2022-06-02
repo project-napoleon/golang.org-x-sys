@@ -1092,6 +1092,9 @@ const (
 	ISIG                                    = 0x80
 	ISOFS_SUPER_MAGIC                       = 0x9660
 	ISTRIP                                  = 0x20
+	ITIMER_PROF                             = 0x2
+	ITIMER_REAL                             = 0x0
+	ITIMER_VIRTUAL                          = 0x1
 	IUCLC                                   = 0x1000
 	IUTF8                                   = 0x4000
 	IXANY                                   = 0x800
