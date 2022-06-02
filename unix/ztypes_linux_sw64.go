@@ -242,6 +242,8 @@ type RawFileDedupeRangeInfo struct {
 }
 
 // none
+// ioctl_linux.go decalred another
+/*
 type FileDedupeRange struct {
 	Src_offset uint64
 	Src_length uint64
@@ -249,6 +251,7 @@ type FileDedupeRange struct {
 	Reserved1  uint16
 	Reserved2  uint32
 }
+*/
 
 // linux
 type FscryptPolicy struct {
