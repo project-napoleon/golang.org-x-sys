@@ -456,4 +456,7 @@ const (
 	SYS_PREADV2                    = 516
 	SYS_PWRITEV2                   = 517
 	SYS_STATX                      = 518
+
+	SYS_SHMAT         = 519
+	SYS_MOUNT_SETATTR = 520
 )

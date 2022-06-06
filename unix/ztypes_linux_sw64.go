@@ -241,6 +241,14 @@ type RawFileDedupeRangeInfo struct {
 	Reserved      uint32
 }
 
+// linux
+const (
+	SizeofRawFileDedupeRange     = 0x18
+	SizeofRawFileDedupeRangeInfo = 0x20
+	FILE_DEDUPE_RANGE_SAME       = 0x0
+	FILE_DEDUPE_RANGE_DIFFERS    = 0x1
+)
+
 // none
 // ioctl_linux.go decalred another
 /*
@@ -456,7 +464,8 @@ type RawSockaddrVM struct {
 	Reserved1 uint16
 	Port      uint32
 	Cid       uint32
-	Zero      [4]uint8
+	Flags     uint8
+	Zero      [3]uint8
 }
 
 // linux
@@ -698,6 +707,7 @@ const (
 	SizeofSockaddrL2TPIP    = 0x10
 	SizeofSockaddrL2TPIP6   = 0x20
 	SizeofSockaddrIUCV      = 0x20
+	SizeofSockaddrNFC       = 0x10
 	SizeofLinger            = 0x8
 	SizeofIPMreq            = 0x8
 	SizeofIPMreqn           = 0xc
@@ -710,6 +720,7 @@ const (
 	SizeofUcred             = 0xc
 	SizeofTCPInfo           = 0x68
 	SizeofCanFilter         = 0x8
+	SizeofTCPRepairOpt      = 0x8
 )
 
 // linux
@@ -3762,6 +3773,15 @@ type OpenHow struct {
 }
 
 const SizeofOpenHow = 0x18
+
+// linux
+const (
+	RESOLVE_BENEATH       = 0x8
+	RESOLVE_IN_ROOT       = 0x10
+	RESOLVE_NO_MAGICLINKS = 0x2
+	RESOLVE_NO_SYMLINKS   = 0x4
+	RESOLVE_NO_XDEV       = 0x1
+)
 
 // arch - new
 const (
